@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TransKwanza - Demo | Plataforma de Remessas P2P Internacional</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="tk-header">
+        <div class="tk-container">
+            <nav class="tk-nav">
+                <div class="tk-logo">
+                    <h1>TransKwanza</h1>
+                    <p class="tk-subtitle">Transferência Segura</p>
+                </div>
+
+                <div class="tk-nav-menu">
+                    <a href="#inicio">Início</a>
+                    <a href="#paises">Países</a>
+                    <a href="#como-funciona">Como Funciona</a>
+                    <a href="#contato">Contato</a>
+                    <button class="tk-btn tk-btn-primary" onclick="showDemoMessage()">Ver Demo Dashboard</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="tk-hero" id="inicio">
+        <div class="tk-container">
+            <div class="tk-hero-content">
+                <h1>Plataforma de remessas cruzadas Segura</h1>
+                <p class="tk-hero-subtitle">
+                    Envie dinheiro internacionalmente de forma segura e econômica.<br>
+                    Conectamos pessoas que querem enviar valores em direções opostas.
+                </p>
+
+                <div class="tk-hero-features">
+                    <div class="tk-feature">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <h3>Taxa de 3%</h3>
+                        <p>Transparente e competitiva</p>
+                    </div>
+
+                    <div class="tk-feature">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                        </svg>
+                        <h3>9 Países</h3>
+                        <p>Operação multinacional</p>
+                    </div>
+
+                    <div class="tk-feature">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2V12L17 7" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <h3>Rápido e Seguro</h3>
+                        <p>Transações protegidas</p>
+                    </div>
+                </div>
+
+                <div class="tk-demo-badge">
+                    ⚠️ Esta é uma versão DEMO estática. Para funcionalidades completas, instale no WordPress.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="tk-section">
+        <div class="tk-container">
+            <div id="tk-calculator-widget" class="tk-calculator">
+                <div class="tk-calculator-header">
+                    <h2>Calculadora de Câmbio</h2>
+                    <p class="tk-subtitle">Conversão em tempo real com todos os países</p>
+                </div>
+
+                <div class="tk-calculator-body">
+                    <!-- From Currency -->
+                    <div class="tk-currency-group">
+                        <label>De (Você envia)</label>
+                        <div class="tk-currency-selector">
+                            <select id="tk-from-country" class="tk-country-select">
+                                <option value="BRA" selected>🇧🇷 Brasil (BRL)</option>
+                                <option value="AGO">🇦🇴 Angola (AOA)</option>
+                                <option value="PRT">🇵🇹 Portugal (EUR)</option>
+                                <option value="USA">🇺🇸 Estados Unidos (USD)</option>
+                                <option value="CUB">🇨🇺 Cuba (CUP)</option>
+                                <option value="RUS">🇷🇺 Rússia (RUB)</option>
+                                <option value="ZAF">🇿🇦 África do Sul (ZAR)</option>
+                                <option value="NAM">🇳🇦 Namíbia (NAD)</option>
+                                <option value="MOZ">🇲🇿 Moçambique (MZN)</option>
+                            </select>
+                            <input type="number" id="tk-from-amount" class="tk-amount-input" placeholder="0.00" value="1000" min="0" step="0.01">
+                        </div>
+                        <div class="tk-currency-info">
+                            <span class="tk-flag">🇧🇷</span>
+                            <span class="tk-currency-name">Brasil - BRL</span>
+                        </div>
+                    </div>
+
+                    <!-- Swap Button -->
+                    <div class="tk-swap-container">
+                        <button type="button" class="tk-swap-btn" onclick="swapCurrencies()">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M17 14L12 9L7 14" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- To Currency -->
+                    <div class="tk-currency-group">
+                        <label>Para (Destinatário recebe)</label>
+                        <div class="tk-currency-selector">
+                            <select id="tk-to-country" class="tk-country-select">
+                                <option value="BRA">🇧🇷 Brasil (BRL)</option>
+                                <option value="AGO">🇦🇴 Angola (AOA)</option>
+                                <option value="PRT" selected>🇵🇹 Portugal (EUR)</option>
+                                <option value="USA">🇺🇸 Estados Unidos (USD)</option>
+                                <option value="CUB">🇨🇺 Cuba (CUP)</option>
+                                <option value="RUS">🇷🇺 Rússia (RUB)</option>
+                                <option value="ZAF">🇿🇦 África do Sul (ZAR)</option>
+                                <option value="NAM">🇳🇦 Namíbia (NAD)</option>
+                                <option value="MOZ">🇲🇿 Moçambique (MZN)</option>
+                            </select>
+                            <input type="number" id="tk-to-amount" class="tk-amount-input" placeholder="0.00" value="175.82" readonly>
+                        </div>
+                        <div class="tk-currency-info">
+                            <span class="tk-flag">🇵🇹</span>
+                            <span class="tk-currency-name">Portugal - EUR</span>
+                        </div>
+                    </div>
+
+                    <!-- Exchange Rate Info -->
+                    <div class="tk-rate-info">
+                        <div class="tk-rate-display">
+                            <span class="tk-rate-label">Taxa de câmbio:</span>
+                            <span class="tk-rate-value">1 BRL = 0.1811 EUR</span>
+                        </div>
+                        <div class="tk-fee-info">
+                            <span>Taxa da plataforma: 3%</span>
+                        </div>
+                        <div class="tk-update-time">
+                            <small>Atualizado agora (DEMO - valores ilustrativos)</small>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="tk-calculator-actions">
+                        <button type="button" class="tk-btn tk-btn-primary" onclick="showDemoMessage()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M22 2L11 13" stroke="currentColor" stroke-width="2"/>
+                                <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Enviar Dinheiro
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="tk-section tk-how-it-works" id="como-funciona">
+        <div class="tk-container">
+            <h2 class="tk-text-center">Como Funciona</h2>
+
+            <div class="tk-steps">
+                <div class="tk-step">
+                    <div class="tk-step-number">1</div>
+                    <h3>Calcule e Crie Proposta</h3>
+                    <p>Use nossa calculadora para ver quanto você vai enviar e receber. Crie sua proposta informando os dados.</p>
+                </div>
+
+                <div class="tk-step">
+                    <div class="tk-step-number">2</div>
+                    <h3>Sistema Encontra Parceria</h3>
+                    <p>Nosso algoritmo inteligente busca alguém querendo enviar na direção oposta (matching automático).</p>
+                </div>
+
+                <div class="tk-step">
+                    <div class="tk-step-number">3</div>
+                    <h3>Ambos Depositam Localmente</h3>
+                    <p>Você deposita na conta local da TransKwanza no seu país, e o parceiro faz o mesmo no país dele.</p>
+                </div>
+
+                <div class="tk-step">
+                    <div class="tk-step-number">4</div>
+                    <h3>Receba o Dinheiro</h3>
+                    <p>Após confirmação dos dois pagamentos, transferimos localmente para os destinatários.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Countries -->
+    <section class="tk-section tk-countries-preview" id="paises">
+        <div class="tk-container">
+            <h2 class="tk-text-center">Países Suportados</h2>
+            <div class="tk-countries-grid">
+                <div class="tk-country-card">
+                    <span class="tk-country-flag">🇧🇷</span>
+                    <h4>Brasil</h4>
+                    <p class="tk-currency">Real (BRL)</p>
+                    <p class="tk-payment">PIX</p>
+                </div>
+                <div class="tk-country-card">
+                    <span class="tk-country-flag">🇦🇴</span>
+                    <h4>Angola</h4>
+                    <p class="tk-currency">Kwanza (AOA)</p>
+                    <p class="tk-payment">Multicaixa Express</p>
+                </div>
+                <div class="tk-country-card">
+                    <span class="tk-country-flag">🇵🇹</span>
+                    <h4>Portugal</h4>
+                    <p class="tk-currency">Euro (EUR)</p>
+                    <p class="tk-payment">SEPA/MB Way</p>
+                </div>
+                <div class="tk-country-card">
+                    <span class="tk-country-flag">🇺🇸</span>
+                    <h4>Estados Unidos</h4>
+                    <p class="tk-currency">Dólar (USD)</p>
+                    <p class="tk-payment">Zelle/ACH</p>
+                </div>
+                <div class="tk-country-card">
+                    <span class="tk-country-flag">🇨🇺</span>
+                    <h4>Cuba</h4>
+                    <p class="tk-currency">Peso Cubano (CUP)</p>
+                    <p class="tk-payment">Transfermóvil</p>
+                </div>
+                <div class="tk-country-card">
+                    <span class="tk-country-flag">🇷🇺</span>
+                    <h4>Rússia</h4>
+                    <p class="tk-currency">Rublo (RUB)</p>
+                    <p class="tk-payment">SBP</p>
+                </div>
+                <div class="tk-country-card">
+                    <span class="tk-country-flag">🇿🇦</span>
+                    <h4>África do Sul</h4>
+                    <p class="tk-currency">Rand (ZAR)</p>
+                    <p class="tk-payment">EFT</p>
+                </div>
+                <div class="tk-country-card">
+                    <span class="tk-country-flag">🇳🇦</span>
+                    <h4>Namíbia</h4>
+                    <p class="tk-currency">Dólar Namibiano (NAD)</p>
+                    <p class="tk-payment">EFT</p>
+                </div>
+                <div class="tk-country-card">
+                    <span class="tk-country-flag">🇲🇿</span>
+                    <h4>Moçambique</h4>
+                    <p class="tk-currency">Metical (MZN)</p>
+                    <p class="tk-payment">M-Pesa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="tk-section tk-cta" id="contato">
+        <div class="tk-container">
+            <div class="tk-cta-content">
+                <h2>Pronto para Começar?</h2>
+                <p>Esta é uma versão DEMO. Para usar a plataforma completa, instale no WordPress.</p>
+                <a href="https://github.com/devtuma/claudcode" target="_blank" class="tk-btn tk-btn-large" style="background: white; color: #4CAF50;">
+                    📦 Ver Repositório no GitHub
+                </a>
+                <p style="margin-top: 20px; color: rgba(255,255,255,0.8);">
+                    <a href="../README.md" style="color: rgba(255,255,255,0.9);">📖 Documentação de Instalação</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="tk-footer">
+        <div class="tk-container">
+            <div class="tk-footer-content">
+                <div class="tk-footer-section">
+                    <h4>TransKwanza</h4>
+                    <p>Plataforma de remessas cruzadas P2P internacional</p>
+                    <p style="margin-top: 10px; color: #ff9800;">⚠️ DEMO - Versão de Demonstração</p>
+                </div>
+
+                <div class="tk-footer-section">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="https://github.com/devtuma/claudcode">Repositório GitHub</a></li>
+                        <li><a href="../README.md">Documentação</a></li>
+                        <li><a href="../INSTALL.md">Guia de Instalação</a></li>
+                        <li><a href="#como-funciona">Como Funciona</a></li>
+                    </ul>
+                </div>
+
+                <div class="tk-footer-section">
+                    <h4>Tecnologias</h4>
+                    <ul>
+                        <li>WordPress + PHP 7.4+</li>
+                        <li>MySQL 5.7+</li>
+                        <li>JavaScript ES6+</li>
+                        <li>CSS3 (Dark Theme)</li>
+                    </ul>
+                </div>
+
+                <div class="tk-footer-section">
+                    <h4>Suporte</h4>
+                    <p>WhatsApp: <a href="https://wa.me/5511934363623">+55 11 93436-3623</a></p>
+                    <p>Email: suporte@transkwanza.com</p>
+                </div>
+            </div>
+
+            <div class="tk-footer-bottom">
+                <p>&copy; 2025 TransKwanza. Todos os direitos reservados. | <strong>DEMO VERSION</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast/Modal para mensagens -->
+    <div id="demo-toast" class="tk-toast">
+        Esta é uma versão DEMO estática. Para funcionalidades completas (matching, transações, etc), instale a versão completa no WordPress!
+    </div>
+
+    <script src="demo.js"></script>
+</body>
+</html>

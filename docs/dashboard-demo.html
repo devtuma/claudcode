@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Demo - TransKwanza</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="tk-header tk-header-dashboard">
+        <div class="tk-container">
+            <nav class="tk-nav">
+                <div class="tk-logo">
+                    <h1>TransKwanza</h1>
+                </div>
+
+                <div class="tk-nav-menu">
+                    <a href="index.html">Início</a>
+                    <div class="tk-notifications">
+                        <button class="tk-notification-btn">
+                            🔔
+                            <span class="tk-notification-badge">3</span>
+                        </button>
+                    </div>
+                    <div class="tk-user-menu">
+                        <span>Olá, Usuário Demo</span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <main class="tk-dashboard">
+        <div class="tk-container">
+            <!-- Dashboard Header -->
+            <div class="tk-dashboard-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p class="tk-user-welcome">Bem-vindo de volta, Usuário Demo!</p>
+                </div>
+
+                <div class="tk-user-stats-summary">
+                    <div class="tk-stat-box">
+                        <strong>5</strong>
+                        <span>Transações</span>
+                    </div>
+                    <div class="tk-stat-box">
+                        <strong>⭐ 4.8</strong>
+                        <span>Avaliação</span>
+                    </div>
+                    <div class="tk-stat-box">
+                        <strong>Ativo</strong>
+                        <span>Status</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Notice -->
+            <div style="background: rgba(255, 152, 0, 0.1); border: 2px solid #ff9800; color: #ff9800; padding: 20px; border-radius: 8px; margin-bottom: 30px; text-align: center;">
+                ⚠️ <strong>DEMO</strong> - Esta é uma versão estática. Para funcionalidades completas, instale no WordPress.
+            </div>
+
+            <!-- Tabs -->
+            <div class="tk-tabs">
+                <button class="tk-tab-btn active">Propostas Disponíveis</button>
+                <button class="tk-tab-btn">Minhas Propostas</button>
+                <button class="tk-tab-btn">Minhas Transações</button>
+            </div>
+
+            <!-- Propostas Disponíveis (Demo) -->
+            <div class="tk-tab-content active">
+                <div class="tk-tab-header">
+                    <div>
+                        <h2>Propostas Disponíveis</h2>
+                        <p>Encontre propostas de outros usuários para fazer matching</p>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="tk-filters">
+                    <select class="tk-filter-select">
+                        <option value="">De (Todas Moedas)</option>
+                        <option>BRL</option>
+                        <option>EUR</option>
+                        <option>USD</option>
+                    </select>
+
+                    <select class="tk-filter-select">
+                        <option value="">Para (Todas Moedas)</option>
+                        <option>BRL</option>
+                        <option>EUR</option>
+                        <option>USD</option>
+                    </select>
+
+                    <button class="tk-btn tk-btn-primary">Filtrar</button>
+                </div>
+
+                <!-- Mock Proposals -->
+                <div class="tk-proposal-card">
+                    <div class="tk-proposal-header">
+                        <div class="tk-user-info">
+                            <div class="tk-user-avatar">J</div>
+                            <div>
+                                <strong>João Silva</strong>
+                                <div class="tk-user-stats">
+                                    <span class="tk-rating">⭐ 4.9</span>
+                                    <span class="tk-transactions">12 transações</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="tk-proposal-time">há 15 min</span>
+                    </div>
+
+                    <div class="tk-proposal-body">
+                        <div class="tk-currency-flow">
+                            <div class="tk-currency-box">
+                                <span class="tk-flag">🇧🇷</span>
+                                <div>
+                                    <strong>5000.00 BRL</strong>
+                                    <small>Brasil</small>
+                                </div>
+                            </div>
+                            <div class="tk-arrow">→</div>
+                            <div class="tk-currency-box">
+                                <span class="tk-flag">🇵🇹</span>
+                                <div>
+                                    <strong>905.50 EUR</strong>
+                                    <small>Portugal</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tk-proposal-info">
+                            <span>Taxa: 1 BRL = 0.1811 EUR</span>
+                        </div>
+                    </div>
+
+                    <div class="tk-proposal-footer">
+                        <button class="tk-btn tk-btn-primary" onclick="alert('DEMO: Esta funcionalidade requer instalação completa no WordPress')">
+                            Aceitar Proposta
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tk-proposal-card">
+                    <div class="tk-proposal-header">
+                        <div class="tk-user-info">
+                            <div class="tk-user-avatar">M</div>
+                            <div>
+                                <strong>Maria Santos</strong>
+                                <div class="tk-user-stats">
+                                    <span class="tk-rating">⭐ 5.0</span>
+                                    <span class="tk-transactions">8 transações</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="tk-proposal-time">há 1 hora</span>
+                    </div>
+
+                    <div class="tk-proposal-body">
+                        <div class="tk-currency-flow">
+                            <div class="tk-currency-box">
+                                <span class="tk-flag">🇺🇸</span>
+                                <div>
+                                    <strong>1000.00 USD</strong>
+                                    <small>Estados Unidos</small>
+                                </div>
+                            </div>
+                            <div class="tk-arrow">→</div>
+                            <div class="tk-currency-box">
+                                <span class="tk-flag">🇧🇷</span>
+                                <div>
+                                    <strong>5130.00 BRL</strong>
+                                    <small>Brasil</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tk-proposal-info">
+                            <span>Taxa: 1 USD = 5.13 BRL</span>
+                        </div>
+                    </div>
+
+                    <div class="tk-proposal-footer">
+                        <button class="tk-btn tk-btn-primary" onclick="alert('DEMO: Esta funcionalidade requer instalação completa no WordPress')">
+                            Aceitar Proposta
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tk-proposal-card">
+                    <div class="tk-proposal-header">
+                        <div class="tk-user-info">
+                            <div class="tk-user-avatar">A</div>
+                            <div>
+                                <strong>António Costa</strong>
+                                <div class="tk-user-stats">
+                                    <span class="tk-rating">⭐ 4.7</span>
+                                    <span class="tk-transactions">15 transações</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="tk-proposal-time">há 2 horas</span>
+                    </div>
+
+                    <div class="tk-proposal-body">
+                        <div class="tk-currency-flow">
+                            <div class="tk-currency-box">
+                                <span class="tk-flag">🇵🇹</span>
+                                <div>
+                                    <strong>500.00 EUR</strong>
+                                    <small>Portugal</small>
+                                </div>
+                            </div>
+                            <div class="tk-arrow">→</div>
+                            <div class="tk-currency-box">
+                                <span class="tk-flag">🇦🇴</span>
+                                <div>
+                                    <strong>470650.00 AOA</strong>
+                                    <small>Angola</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tk-proposal-info">
+                            <span>Taxa: 1 EUR = 941.30 AOA</span>
+                        </div>
+                    </div>
+
+                    <div class="tk-proposal-footer">
+                        <button class="tk-btn tk-btn-primary" onclick="alert('DEMO: Esta funcionalidade requer instalação completa no WordPress')">
+                            Aceitar Proposta
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="tk-footer">
+        <div class="tk-container">
+            <div class="tk-footer-bottom">
+                <p>&copy; 2025 TransKwanza. <strong>DEMO VERSION</strong> | <a href="index.html">Voltar ao Início</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,65 @@
+/*
+Theme Name: TransKwanza
+Theme URI: https://transkwanza.com
+Author: TransKwanza Team
+Author URI: https://transkwanza.com
+Description: Plataforma de remessas cruzadas P2P internacional. Sistema inovador que conecta usuários que desejam enviar dinheiro em direções opostas, eliminando transferências internacionais tradicionais.
+Version: 1.0.0
+License: Proprietary
+License URI: https://transkwanza.com/license
+Text Domain: transkwanza
+Tags: fintech, remittance, p2p, international, dark-mode, responsive
+Requires at least: 5.8
+Tested up to: 6.4
+Requires PHP: 7.4
+*/
+
+/* This file is required by WordPress but styles are in assets/css/style.css */
+
+/* Basic WordPress Required Styles */
+.alignleft {
+    float: left;
+    margin-right: 1.5rem;
+}
+
+.alignright {
+    float: right;
+    margin-left: 1.5rem;
+}
+
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wp-caption {
+    max-width: 100%;
+}
+
+.wp-caption-text {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+/* WordPress Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.gallery-item {
+    display: inline-block;
+}
+
+/* Additional styles are loaded from assets/css/style.css */

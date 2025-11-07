@@ -1,46 +1,22 @@
-<!DOCTYPE html>
-<html <?php language_attributes(); ?>>
-<head>
-    <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - <?php bloginfo('name'); ?></title>
-    <?php wp_head(); ?>
-</head>
-<body <?php body_class(); ?>>
-
 <?php
+/**
+ * Template Name: Dashboard
+ *
+ * Template para o dashboard do usuário
+ */
+
+// Verificar se usuário está logado
+if (!is_user_logged_in()) {
+    wp_redirect(wp_login_url(get_permalink()));
+    exit;
+}
+
 // Get or create TK user
 $current_user = wp_get_current_user();
 $tk_user = tk_get_or_create_tk_user($current_user->ID);
+
+get_header();
 ?>
-
-<!-- Header -->
-<header class="tk-header tk-header-dashboard">
-    <div class="tk-container">
-        <nav class="tk-nav">
-            <div class="tk-logo">
-                <h1>TransKwanza</h1>
-            </div>
-
-            <div class="tk-nav-menu">
-                <a href="<?php echo home_url(); ?>">Início</a>
-                <a href="<?php echo home_url('/suporte'); ?>">Suporte</a>
-
-                <div class="tk-notifications">
-                    <button class="tk-notification-btn">
-                        🔔
-                        <span class="tk-notification-badge" id="tk-notification-badge">0</span>
-                    </button>
-                </div>
-
-                <div class="tk-user-menu">
-                    <span>Olá, <?php echo esc_html($tk_user->full_name); ?></span>
-                    <a href="<?php echo wp_logout_url(home_url()); ?>" class="tk-btn tk-btn-secondary">Sair</a>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
 
 <!-- Dashboard -->
 <main class="tk-dashboard" id="tk-dashboard">
@@ -167,16 +143,5 @@ $tk_user = tk_get_or_create_tk_user($current_user->ID);
     </div>
 </main>
 
-<!-- Footer -->
-<footer class="tk-footer">
-    <div class="tk-container">
-        <div class="tk-footer-bottom">
-            <p>&copy; <?php echo date('Y'); ?> TransKwanza. Todos os direitos reservados.</p>
-            <p>Suporte: <a href="https://wa.me/5511934363623">WhatsApp +55 11 93436-3623</a></p>
-        </div>
-    </div>
-</footer>
-
-<?php wp_footer(); ?>
-</body>
-</html>
+<?php
+get_footer();

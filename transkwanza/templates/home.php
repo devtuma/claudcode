@@ -1,38 +1,12 @@
-<!DOCTYPE html>
-<html <?php language_attributes(); ?>>
-<head>
-    <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php bloginfo('name'); ?> - <?php bloginfo('description'); ?></title>
-    <?php wp_head(); ?>
-</head>
-<body <?php body_class(); ?>>
+<?php
+/**
+ * Template Name: Home
+ *
+ * Template para a página inicial do TransKwanza
+ */
 
-<!-- Header -->
-<header class="tk-header">
-    <div class="tk-container">
-        <nav class="tk-nav">
-            <div class="tk-logo">
-                <h1>TransKwanza</h1>
-                <p class="tk-subtitle">Transferência Segura</p>
-            </div>
-
-            <div class="tk-nav-menu">
-                <a href="<?php echo home_url(); ?>">Início</a>
-                <a href="<?php echo home_url('/paises'); ?>">Países Suportados</a>
-                <a href="<?php echo home_url('/suporte'); ?>">Suporte</a>
-
-                <?php if (is_user_logged_in()): ?>
-                    <a href="<?php echo home_url('/dashboard'); ?>" class="tk-btn tk-btn-primary">Dashboard</a>
-                    <a href="<?php echo wp_logout_url(home_url()); ?>">Sair</a>
-                <?php else: ?>
-                    <a href="<?php echo wp_login_url(); ?>" class="tk-btn tk-btn-secondary">Login</a>
-                    <a href="<?php echo wp_registration_url(); ?>" class="tk-btn tk-btn-primary">Cadastrar</a>
-                <?php endif; ?>
-            </div>
-        </nav>
-    </div>
-</header>
+get_header();
+?>
 
 <!-- Hero Section -->
 <section class="tk-hero">
@@ -157,38 +131,5 @@
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="tk-footer">
-    <div class="tk-container">
-        <div class="tk-footer-content">
-            <div class="tk-footer-section">
-                <h4>TransKwanza</h4>
-                <p>Plataforma de remessas cruzadas P2P internacional</p>
-            </div>
-
-            <div class="tk-footer-section">
-                <h4>Links Úteis</h4>
-                <ul>
-                    <li><a href="<?php echo home_url('/paises'); ?>">Países Suportados</a></li>
-                    <li><a href="<?php echo home_url('/suporte'); ?>">Suporte</a></li>
-                    <li><a href="<?php echo home_url('/termos'); ?>">Termos de Uso</a></li>
-                    <li><a href="<?php echo home_url('/privacidade'); ?>">Privacidade</a></li>
-                </ul>
-            </div>
-
-            <div class="tk-footer-section">
-                <h4>Suporte</h4>
-                <p>WhatsApp: <a href="https://wa.me/5511934363623">+55 11 93436-3623</a></p>
-                <p>Email: suporte@transkwanza.com</p>
-            </div>
-        </div>
-
-        <div class="tk-footer-bottom">
-            <p>&copy; <?php echo date('Y'); ?> TransKwanza. Todos os direitos reservados.</p>
-        </div>
-    </div>
-</footer>
-
-<?php wp_footer(); ?>
-</body>
-</html>
+<?php
+get_footer();

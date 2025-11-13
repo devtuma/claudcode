@@ -30,7 +30,7 @@ function sanitize($input) {
 }
 
 /**
- * Get exchange rate (mock - replace with real API)
+ * Get exchange rate from real APIs with fallback
  */
 function getExchangeRate($from, $to) {
     if ($from === $to) {
@@ -56,21 +56,16 @@ function getExchangeRate($from, $to) {
         return (float)$cached['rate_with_fee'];
     }
 
-    // Mock rates (replace with Google Finance API)
-    $mockRates = [
-        'BRL-EUR' => 0.1811,
-        'BRL-USD' => 0.1950,
-        'EUR-BRL' => 5.52,
-        'USD-BRL' => 5.13,
-        'EUR-USD' => 1.08,
-        'USD-EUR' => 0.93,
-    ];
+    // Fetch real rate from APIs
+    $rate = fetchRealExchangeRate($from, $to);
 
-    $key = "$from-$to";
-    $rate = $mockRates[$key] ?? 1.0;
+    if ($rate === false) {
+        error_log("TransKwanza: Failed to fetch exchange rate for {$from}-{$to}");
+        return 1.0; // Fallback
+    }
 
     // Apply 3% fee
-    $rateWithFee = $rate * (1 - PLATFORM_FEE);
+    $rateWithFee = round($rate * (1 - PLATFORM_FEE), 4);
 
     // Cache it
     $stmt = $db->prepare("
@@ -87,6 +82,109 @@ function getExchangeRate($from, $to) {
     ]);
 
     return $rateWithFee;
+}
+
+/**
+ * Fetch real exchange rate from multiple sources
+ */
+function fetchRealExchangeRate($from, $to) {
+    // Try ExchangeRate-API first (free, no key required)
+    $rate = fetchFromExchangeRateAPI($from, $to);
+    if ($rate !== false) {
+        return round($rate, 4); // Precisão de 4 casas decimais
+    }
+
+    // Fallback 1: Try Google Finance scraping
+    $rate = fetchFromGoogleFinance($from, $to);
+    if ($rate !== false) {
+        return round($rate, 4);
+    }
+
+    // Fallback 2: Try inverse rate
+    $inverseRate = fetchFromExchangeRateAPI($to, $from);
+    if ($inverseRate !== false && $inverseRate > 0) {
+        return round(1 / $inverseRate, 4);
+    }
+
+    return false;
+}
+
+/**
+ * Fetch from ExchangeRate-API.com (Free, reliable)
+ */
+function fetchFromExchangeRateAPI($from, $to) {
+    $url = "https://api.exchangerate-api.com/v4/latest/" . strtoupper($from);
+
+    try {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($httpCode !== 200 || !$response) {
+            return false;
+        }
+
+        $data = json_decode($response, true);
+
+        if (isset($data['rates'][$to])) {
+            return (float)$data['rates'][$to];
+        }
+
+        return false;
+    } catch (Exception $e) {
+        error_log('TransKwanza: ExchangeRate-API error - ' . $e->getMessage());
+        return false;
+    }
+}
+
+/**
+ * Fetch from Google Finance via scraping (Fallback)
+ */
+function fetchFromGoogleFinance($from, $to) {
+    $url = "https://www.google.com/finance/quote/{$from}-{$to}";
+
+    try {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        $html = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($httpCode !== 200 || !$html) {
+            return false;
+        }
+
+        // Multiple parsing patterns for reliability
+        $patterns = [
+            '/<div class="YMlKec fxKbKc">([0-9,.]+)<\/div>/',
+            '/data-last-price="([0-9.]+)"/',
+            '/"price":"([0-9.]+)"/',
+            '/class=".*?YMlKec.*?">([0-9,.]+)</'
+        ];
+
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $html, $matches)) {
+                $rate = str_replace(',', '', $matches[1]);
+                return (float)$rate;
+            }
+        }
+
+        return false;
+    } catch (Exception $e) {
+        error_log('TransKwanza: Google Finance error - ' . $e->getMessage());
+        return false;
+    }
 }
 
 /**

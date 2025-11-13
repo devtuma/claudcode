@@ -205,5 +205,101 @@ style.textContent = `
             text-align: center;
         }
     }
+
+    /* Mobile Menu Toggle */
+    .tk-menu-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 10;
+    }
+
+    .tk-menu-toggle span {
+        width: 30px;
+        height: 3px;
+        background: var(--tk-text-primary);
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .tk-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .tk-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .tk-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    @media (max-width: 768px) {
+        .tk-menu-toggle {
+            display: flex;
+        }
+
+        .tk-nav-menu {
+            position: fixed;
+            top: 70px;
+            right: -100%;
+            width: 100%;
+            max-width: 300px;
+            background: var(--tk-bg-card);
+            border-left: 1px solid var(--tk-border);
+            flex-direction: column;
+            padding: 20px;
+            gap: 15px;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            height: calc(100vh - 70px);
+            overflow-y: auto;
+        }
+
+        .tk-nav-menu.active {
+            right: 0;
+        }
+
+        .tk-nav-menu a,
+        .tk-nav-menu button {
+            width: 100%;
+            text-align: center;
+        }
+    }
 `;
 document.head.appendChild(style);
+
+// Mobile menu toggle functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    }
+});

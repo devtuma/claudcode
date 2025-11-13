@@ -78,14 +78,77 @@ class TK_ExchangeRateService {
     }
 
     /**
-     * Fetch exchange rate from Google Finance
+     * Fetch exchange rate from multiple sources with fallback
      *
      * @param string $from_currency
      * @param string $to_currency
      * @return float|false Exchange rate or false on error
      */
     private function fetchFromGoogleFinance($from_currency, $to_currency) {
-        // Google Finance URL
+        // Try ExchangeRate-API first (free, reliable, no key needed for basic use)
+        $rate = $this->fetchFromExchangeRateAPI($from_currency, $to_currency);
+        if ($rate !== false) {
+            return round($rate, 4); // Precisão de 4 casas decimais
+        }
+
+        // Fallback 1: Try Google Finance scraping
+        $rate = $this->fetchFromGoogleFinanceScraping($from_currency, $to_currency);
+        if ($rate !== false) {
+            return round($rate, 4);
+        }
+
+        // Fallback 2: Try alternative API
+        $rate = $this->fetchFromCurrencyAPI($from_currency, $to_currency);
+        if ($rate !== false) {
+            return round($rate, 4);
+        }
+
+        error_log("TransKwanza: All exchange rate sources failed for {$from_currency}-{$to_currency}");
+        return false;
+    }
+
+    /**
+     * Fetch from ExchangeRate-API.com (Free, no key required)
+     *
+     * @param string $from_currency
+     * @param string $to_currency
+     * @return float|false
+     */
+    private function fetchFromExchangeRateAPI($from_currency, $to_currency) {
+        $url = sprintf(
+            'https://api.exchangerate-api.com/v4/latest/%s',
+            strtoupper($from_currency)
+        );
+
+        try {
+            $response = wp_remote_get($url, ['timeout' => 10]);
+
+            if (is_wp_error($response)) {
+                return false;
+            }
+
+            $body = wp_remote_retrieve_body($response);
+            $data = json_decode($body, true);
+
+            if (isset($data['rates'][$to_currency])) {
+                return floatval($data['rates'][$to_currency]);
+            }
+
+            return false;
+        } catch (Exception $e) {
+            error_log('TransKwanza: ExchangeRate-API error - ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Fetch from Google Finance via HTML scraping (Fallback)
+     *
+     * @param string $from_currency
+     * @param string $to_currency
+     * @return float|false
+     */
+    private function fetchFromGoogleFinanceScraping($from_currency, $to_currency) {
         $url = sprintf(
             'https://www.google.com/finance/quote/%s-%s',
             strtoupper($from_currency),
@@ -99,32 +162,64 @@ class TK_ExchangeRateService {
             ]);
 
             if (is_wp_error($response)) {
-                error_log('TransKwanza: Failed to fetch exchange rate - ' . $response->get_error_message());
                 return false;
             }
 
             $body = wp_remote_retrieve_body($response);
 
-            // Parse HTML to extract exchange rate
-            // Google Finance shows rate in format: <div class="YMlKec fxKbKc">1.2345</div>
-            preg_match('/<div class="YMlKec fxKbKc">([0-9,.]+)<\/div>/', $body, $matches);
+            // Parse HTML - múltiplos métodos de parsing
+            $patterns = [
+                '/<div class="YMlKec fxKbKc">([0-9,.]+)<\/div>/',
+                '/data-last-price="([0-9.]+)"/',
+                '/"price":"([0-9.]+)"/',
+                '/class=".*?YMlKec.*?">([0-9,.]+)</'
+            ];
 
-            if (isset($matches[1])) {
-                $rate = str_replace(',', '', $matches[1]);
-                return floatval($rate);
+            foreach ($patterns as $pattern) {
+                if (preg_match($pattern, $body, $matches)) {
+                    $rate = str_replace(',', '', $matches[1]);
+                    return floatval($rate);
+                }
             }
 
-            // Alternative parsing method
-            preg_match('/data-last-price="([0-9.]+)"/', $body, $matches);
-            if (isset($matches[1])) {
-                return floatval($matches[1]);
-            }
-
-            error_log('TransKwanza: Could not parse exchange rate from Google Finance');
             return false;
-
         } catch (Exception $e) {
-            error_log('TransKwanza: Exception fetching exchange rate - ' . $e->getMessage());
+            error_log('TransKwanza: Google Finance scraping error - ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Fetch from CurrencyAPI.com (Alternative fallback)
+     *
+     * @param string $from_currency
+     * @param string $to_currency
+     * @return float|false
+     */
+    private function fetchFromCurrencyAPI($from_currency, $to_currency) {
+        // Free tier: https://freecurrencyapi.com/
+        $url = sprintf(
+            'https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_example&base_currency=%s&currencies=%s',
+            strtoupper($from_currency),
+            strtoupper($to_currency)
+        );
+
+        try {
+            $response = wp_remote_get($url, ['timeout' => 10]);
+
+            if (is_wp_error($response)) {
+                return false;
+            }
+
+            $body = wp_remote_retrieve_body($response);
+            $data = json_decode($body, true);
+
+            if (isset($data['data'][$to_currency])) {
+                return floatval($data['data'][$to_currency]);
+            }
+
+            return false;
+        } catch (Exception $e) {
             return false;
         }
     }

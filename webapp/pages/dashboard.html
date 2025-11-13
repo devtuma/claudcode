@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TransKwanza</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header class="tk-header">
+        <div class="tk-container">
+            <nav class="tk-nav">
+                <div class="tk-logo">
+                    <h1>🌍 TransKwanza</h1>
+                </div>
+                <div class="tk-nav-links">
+                    <button id="btn-notifications" class="tk-btn tk-btn-icon" title="Notificações">
+                        🔔 <span id="notification-badge" class="tk-badge" style="display: none;">0</span>
+                    </button>
+                    <button id="btn-logout" class="tk-btn tk-btn-secondary tk-btn-sm">Sair</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="tk-dashboard">
+        <div class="tk-container">
+            <!-- Dashboard Header -->
+            <div class="tk-dashboard-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p class="tk-user-welcome">Bem-vindo de volta, <span id="user-name">...</span>!</p>
+                </div>
+
+                <div class="tk-user-stats-summary">
+                    <div class="tk-stat-box">
+                        <strong id="user-transactions">0</strong>
+                        <span>Transações</span>
+                    </div>
+                    <div class="tk-stat-box">
+                        <strong>⭐ <span id="user-rating">5.00</span></strong>
+                        <span>Avaliação</span>
+                    </div>
+                    <div class="tk-stat-box">
+                        <strong id="user-status">Active</strong>
+                        <span>Status</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Tab Select -->
+            <select id="tk-mobile-tab-select" class="tk-mobile-tab-select">
+                <option value="proposals-available">Propostas Disponíveis</option>
+                <option value="calculator">Calculadora</option>
+                <option value="my-proposals">Minhas Propostas</option>
+                <option value="my-transactions">Minhas Transações</option>
+            </select>
+
+            <!-- Desktop Tabs -->
+            <div class="tk-tabs">
+                <button class="tk-tab-btn active" data-tab="proposals-available">
+                    Propostas Disponíveis
+                </button>
+                <button class="tk-tab-btn" data-tab="calculator">
+                    Calculadora
+                </button>
+                <button class="tk-tab-btn" data-tab="my-proposals">
+                    Minhas Propostas
+                </button>
+                <button class="tk-tab-btn" data-tab="my-transactions">
+                    Minhas Transações
+                </button>
+            </div>
+
+            <!-- Tab: Propostas Disponíveis -->
+            <div id="tk-tab-proposals-available" class="tk-tab-content active">
+                <div class="tk-tab-header">
+                    <h2>Propostas Disponíveis</h2>
+                    <p>Encontre propostas de outros usuários para fazer matching</p>
+                </div>
+
+                <!-- Filters -->
+                <div class="tk-filters">
+                    <select id="filter-from-currency" class="tk-filter-select">
+                        <option value="">De (Todas Moedas)</option>
+                    </select>
+
+                    <select id="filter-to-currency" class="tk-filter-select">
+                        <option value="">Para (Todas Moedas)</option>
+                    </select>
+
+                    <button class="tk-btn tk-btn-primary" id="btn-apply-filters">Filtrar</button>
+                </div>
+
+                <div id="available-proposals-list" class="tk-proposals-list">
+                    <!-- Dynamic content loaded by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Tab: Calculadora -->
+            <div id="tk-tab-calculator" class="tk-tab-content">
+                <div class="tk-tab-header">
+                    <h2>Calculadora de Câmbio</h2>
+                    <p>Calcule quanto você vai enviar e receber</p>
+                </div>
+
+                <div class="tk-calculator">
+                    <form id="proposal-form" class="tk-calculator-form">
+                        <div class="tk-calculator-row">
+                            <div class="tk-form-group">
+                                <label for="from-country">País de Origem</label>
+                                <select id="from-country" name="from_country" required>
+                                    <option value="">Selecione o país</option>
+                                </select>
+                            </div>
+
+                            <div class="tk-form-group">
+                                <label for="from-currency">Moeda</label>
+                                <select id="from-currency" name="from_currency" required>
+                                    <option value="">Selecione a moeda</option>
+                                </select>
+                            </div>
+
+                            <div class="tk-form-group">
+                                <label for="from-amount">Valor a Enviar</label>
+                                <input type="number" id="from-amount" name="send_amount" step="0.01" min="0.01" placeholder="0.00" required>
+                            </div>
+                        </div>
+
+                        <div class="tk-calculator-arrow">→</div>
+
+                        <div class="tk-calculator-row">
+                            <div class="tk-form-group">
+                                <label for="to-country">País de Destino</label>
+                                <select id="to-country" name="to_country" required>
+                                    <option value="">Selecione o país</option>
+                                </select>
+                            </div>
+
+                            <div class="tk-form-group">
+                                <label for="to-currency">Moeda</label>
+                                <select id="to-currency" name="to_currency" required>
+                                    <option value="">Selecione a moeda</option>
+                                </select>
+                            </div>
+
+                            <div class="tk-form-group">
+                                <label for="to-amount">Valor a Receber</label>
+                                <input type="number" id="to-amount" step="0.01" placeholder="0.00" readonly>
+                            </div>
+                        </div>
+
+                        <div class="tk-calculator-info" id="proposal-calculator-info" style="display: none;">
+                            <div class="tk-info-row">
+                                <span>Taxa de câmbio:</span>
+                                <strong id="proposal-rate">-</strong>
+                            </div>
+                            <div class="tk-info-row">
+                                <span>Taxa da plataforma (3%):</span>
+                                <strong id="proposal-fee">-</strong>
+                            </div>
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="recipient-name">Nome do Destinatário (opcional)</label>
+                            <input type="text" id="recipient-name" name="recipient_name" placeholder="Nome de quem vai receber">
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="recipient-phone">Telefone do Destinatário (opcional)</label>
+                            <input type="tel" id="recipient-phone" name="recipient_phone" placeholder="+244 XXX XXX XXX">
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="recipient-details">Detalhes Adicionais (opcional)</label>
+                            <textarea id="recipient-details" name="recipient_details" rows="3" placeholder="Informações de pagamento ou instruções especiais"></textarea>
+                        </div>
+
+                        <div class="tk-form-actions">
+                            <button type="submit" class="tk-btn tk-btn-primary tk-btn-block">
+                                Criar Proposta
+                            </button>
+                        </div>
+
+                        <div id="proposal-error" class="tk-error-message" style="display: none;"></div>
+                        <div id="proposal-success" class="tk-success-message" style="display: none;"></div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tab: Minhas Propostas -->
+            <div id="tk-tab-my-proposals" class="tk-tab-content">
+                <div class="tk-tab-header">
+                    <h2>Minhas Propostas</h2>
+                    <p>Gerencie suas propostas ativas</p>
+                </div>
+
+                <div id="my-proposals-list" class="tk-proposals-list">
+                    <!-- Dynamic content loaded by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Tab: Minhas Transações -->
+            <div id="tk-tab-my-transactions" class="tk-tab-content">
+                <div class="tk-tab-header">
+                    <h2>Minhas Transações</h2>
+                    <p>Acompanhe o status das suas transações</p>
+                </div>
+
+                <div id="my-transactions-list" class="tk-transactions-list">
+                    <!-- Dynamic content loaded by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notifications Modal -->
+    <div id="notifications-modal" class="tk-modal" style="display: none;">
+        <div class="tk-modal-content">
+            <div class="tk-modal-header">
+                <h3>Notificações</h3>
+                <button class="tk-modal-close" onclick="closeNotificationsModal()">&times;</button>
+            </div>
+            <div class="tk-modal-body">
+                <div id="notifications-list">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="tk-footer">
+        <div class="tk-container">
+            <p>&copy; 2025 TransKwanza - Plataforma de Remessas P2P</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>

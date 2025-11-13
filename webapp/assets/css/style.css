@@ -1,0 +1,978 @@
+/**
+ * TransKwanza Standalone Web App Styles
+ * Dark Theme - Mobile First
+ */
+
+/* ============================================
+   CSS Variables
+   ============================================ */
+:root {
+    /* Colors */
+    --tk-primary: #4CAF50;
+    --tk-primary-hover: #45a049;
+    --tk-secondary: #FF9800;
+    --tk-danger: #f44336;
+    --tk-warning: #ff9800;
+    --tk-success: #4caf50;
+    --tk-info: #2196F3;
+
+    /* Dark Theme */
+    --tk-bg-primary: #121212;
+    --tk-bg-secondary: #1a1a1a;
+    --tk-bg-card: #1e1e1e;
+    --tk-bg-hover: #2a2a2a;
+
+    --tk-text-primary: #ffffff;
+    --tk-text-secondary: #b3b3b3;
+    --tk-text-muted: #808080;
+
+    --tk-border: #333333;
+    --tk-border-light: #404040;
+
+    /* Spacing */
+    --tk-spacing-xs: 0.25rem;
+    --tk-spacing-sm: 0.5rem;
+    --tk-spacing-md: 1rem;
+    --tk-spacing-lg: 1.5rem;
+    --tk-spacing-xl: 2rem;
+    --tk-spacing-xxl: 3rem;
+
+    /* Border Radius */
+    --tk-radius-sm: 4px;
+    --tk-radius-md: 8px;
+    --tk-radius-lg: 12px;
+    --tk-radius-xl: 16px;
+
+    /* Shadows */
+    --tk-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --tk-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --tk-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+
+    /* Transitions */
+    --tk-transition: all 0.3s ease;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--tk-bg-primary);
+    color: var(--tk-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    color: var(--tk-primary);
+    text-decoration: none;
+    transition: var(--tk-transition);
+}
+
+a:hover {
+    color: var(--tk-primary-hover);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ============================================
+   Container
+   ============================================ */
+.tk-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--tk-spacing-md);
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.tk-header {
+    background: var(--tk-bg-card);
+    border-bottom: 1px solid var(--tk-border);
+    padding: var(--tk-spacing-md) 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--tk-shadow-md);
+}
+
+.tk-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tk-logo h1 {
+    font-size: 1.5rem;
+    color: var(--tk-primary);
+    margin: 0;
+}
+
+.tk-nav-links {
+    display: flex;
+    gap: var(--tk-spacing-md);
+    align-items: center;
+}
+
+.tk-nav-links a {
+    color: var(--tk-text-secondary);
+    font-weight: 500;
+}
+
+.tk-nav-links a:hover {
+    color: var(--tk-text-primary);
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+.tk-btn {
+    padding: var(--tk-spacing-sm) var(--tk-spacing-lg);
+    border: none;
+    border-radius: var(--tk-radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--tk-transition);
+    display: inline-block;
+    text-align: center;
+}
+
+.tk-btn-primary {
+    background: var(--tk-primary);
+    color: white;
+}
+
+.tk-btn-primary:hover {
+    background: var(--tk-primary-hover);
+}
+
+.tk-btn-secondary {
+    background: var(--tk-bg-hover);
+    color: var(--tk-text-primary);
+    border: 1px solid var(--tk-border);
+}
+
+.tk-btn-secondary:hover {
+    background: var(--tk-bg-card);
+}
+
+.tk-btn-danger {
+    background: var(--tk-danger);
+    color: white;
+}
+
+.tk-btn-danger:hover {
+    background: #d32f2f;
+}
+
+.tk-btn-sm {
+    padding: var(--tk-spacing-xs) var(--tk-spacing-md);
+    font-size: 0.875rem;
+}
+
+.tk-btn-large {
+    padding: var(--tk-spacing-md) var(--tk-spacing-xxl);
+    font-size: 1.125rem;
+}
+
+.tk-btn-block {
+    width: 100%;
+    display: block;
+}
+
+.tk-btn-icon {
+    position: relative;
+    padding: var(--tk-spacing-sm);
+}
+
+.tk-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--tk-danger);
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+.tk-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: var(--tk-spacing-xxl) 0;
+    text-align: center;
+}
+
+.tk-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--tk-spacing-md);
+    background: linear-gradient(135deg, var(--tk-primary) 0%, #81C784 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tk-hero-subtitle {
+    font-size: 1.125rem;
+    color: var(--tk-text-secondary);
+    margin-bottom: var(--tk-spacing-xl);
+}
+
+.tk-hero-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--tk-spacing-lg);
+    margin-top: var(--tk-spacing-xxl);
+}
+
+.tk-feature {
+    background: var(--tk-bg-card);
+    padding: var(--tk-spacing-lg);
+    border-radius: var(--tk-radius-lg);
+    border: 1px solid var(--tk-border);
+}
+
+.tk-feature-icon {
+    font-size: 3rem;
+    margin-bottom: var(--tk-spacing-sm);
+}
+
+.tk-feature h3 {
+    margin-bottom: var(--tk-spacing-xs);
+    color: var(--tk-primary);
+}
+
+.tk-feature p {
+    color: var(--tk-text-secondary);
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   Section
+   ============================================ */
+.tk-section {
+    padding: var(--tk-spacing-xxl) 0;
+}
+
+.tk-text-center {
+    text-align: center;
+    margin-bottom: var(--tk-spacing-xl);
+}
+
+/* ============================================
+   Calculator
+   ============================================ */
+.tk-calculator {
+    background: var(--tk-bg-card);
+    border-radius: var(--tk-radius-lg);
+    padding: var(--tk-spacing-xl);
+    box-shadow: var(--tk-shadow-lg);
+    border: 1px solid var(--tk-border);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tk-calculator h2 {
+    text-align: center;
+    margin-bottom: var(--tk-spacing-sm);
+}
+
+.tk-calculator-subtitle {
+    text-align: center;
+    color: var(--tk-text-secondary);
+    margin-bottom: var(--tk-spacing-xl);
+}
+
+.tk-calculator-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tk-spacing-lg);
+}
+
+.tk-calculator-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--tk-spacing-md);
+}
+
+.tk-calculator-arrow {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--tk-primary);
+}
+
+.tk-calculator-info {
+    background: var(--tk-bg-hover);
+    padding: var(--tk-spacing-md);
+    border-radius: var(--tk-radius-md);
+    border: 1px solid var(--tk-border);
+}
+
+.tk-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--tk-spacing-xs) 0;
+    color: var(--tk-text-secondary);
+}
+
+.tk-info-row strong {
+    color: var(--tk-text-primary);
+}
+
+/* ============================================
+   Forms
+   ============================================ */
+.tk-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tk-spacing-xs);
+}
+
+.tk-form-group label {
+    font-weight: 600;
+    color: var(--tk-text-secondary);
+    font-size: 0.875rem;
+}
+
+.tk-form-group input,
+.tk-form-group select,
+.tk-form-group textarea {
+    padding: var(--tk-spacing-sm) var(--tk-spacing-md);
+    border: 1px solid var(--tk-border);
+    border-radius: var(--tk-radius-md);
+    background: var(--tk-bg-secondary);
+    color: var(--tk-text-primary);
+    font-size: 1rem;
+    transition: var(--tk-transition);
+}
+
+.tk-form-group input:focus,
+.tk-form-group select:focus,
+.tk-form-group textarea:focus {
+    outline: none;
+    border-color: var(--tk-primary);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.tk-form-group input[readonly] {
+    background: var(--tk-bg-hover);
+    cursor: not-allowed;
+}
+
+.tk-form-actions {
+    margin-top: var(--tk-spacing-md);
+}
+
+/* ============================================
+   How It Works
+   ============================================ */
+.tk-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--tk-spacing-lg);
+}
+
+.tk-step {
+    background: var(--tk-bg-card);
+    padding: var(--tk-spacing-lg);
+    border-radius: var(--tk-radius-lg);
+    border: 1px solid var(--tk-border);
+    text-align: center;
+}
+
+.tk-step-number {
+    width: 50px;
+    height: 50px;
+    background: var(--tk-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto var(--tk-spacing-md);
+}
+
+.tk-step h3 {
+    margin-bottom: var(--tk-spacing-sm);
+}
+
+.tk-step p {
+    color: var(--tk-text-secondary);
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   Countries Grid
+   ============================================ */
+.tk-countries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--tk-spacing-md);
+}
+
+.tk-country-card {
+    background: var(--tk-bg-card);
+    padding: var(--tk-spacing-lg);
+    border-radius: var(--tk-radius-lg);
+    border: 1px solid var(--tk-border);
+    text-align: center;
+    transition: var(--tk-transition);
+}
+
+.tk-country-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--tk-shadow-lg);
+    border-color: var(--tk-primary);
+}
+
+.tk-country-flag {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: var(--tk-spacing-sm);
+}
+
+.tk-country-card h4 {
+    margin-bottom: var(--tk-spacing-xs);
+}
+
+.tk-country-card .tk-currency {
+    color: var(--tk-primary);
+    font-weight: 600;
+}
+
+.tk-country-card .tk-payment {
+    color: var(--tk-text-secondary);
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   CTA Section
+   ============================================ */
+.tk-cta {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    text-align: center;
+}
+
+.tk-cta-content h2 {
+    margin-bottom: var(--tk-spacing-md);
+}
+
+.tk-cta-content p {
+    color: var(--tk-text-secondary);
+    margin-bottom: var(--tk-spacing-xl);
+}
+
+/* ============================================
+   Auth Page
+   ============================================ */
+.tk-auth-page {
+    padding: var(--tk-spacing-xxl) 0;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+}
+
+.tk-auth-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--tk-bg-card);
+    border-radius: var(--tk-radius-lg);
+    padding: var(--tk-spacing-xl);
+    box-shadow: var(--tk-shadow-lg);
+    border: 1px solid var(--tk-border);
+}
+
+.tk-auth-tabs {
+    display: flex;
+    gap: var(--tk-spacing-sm);
+    margin-bottom: var(--tk-spacing-xl);
+}
+
+.tk-auth-tab {
+    flex: 1;
+    padding: var(--tk-spacing-md);
+    background: var(--tk-bg-secondary);
+    border: 1px solid var(--tk-border);
+    border-radius: var(--tk-radius-md);
+    color: var(--tk-text-secondary);
+    cursor: pointer;
+    transition: var(--tk-transition);
+}
+
+.tk-auth-tab.active {
+    background: var(--tk-primary);
+    color: white;
+    border-color: var(--tk-primary);
+}
+
+.tk-auth-form {
+    display: none;
+}
+
+.tk-auth-form.active {
+    display: block;
+}
+
+.tk-auth-form h2 {
+    margin-bottom: var(--tk-spacing-sm);
+}
+
+.tk-auth-subtitle {
+    color: var(--tk-text-secondary);
+    margin-bottom: var(--tk-spacing-xl);
+}
+
+/* ============================================
+   Dashboard
+   ============================================ */
+.tk-dashboard {
+    padding: var(--tk-spacing-xl) 0;
+}
+
+.tk-dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--tk-spacing-xl);
+    padding: var(--tk-spacing-lg);
+    background: var(--tk-bg-card);
+    border-radius: var(--tk-radius-lg);
+    border: 1px solid var(--tk-border);
+}
+
+.tk-user-welcome {
+    color: var(--tk-text-secondary);
+    margin-top: var(--tk-spacing-xs);
+}
+
+.tk-user-stats-summary {
+    display: flex;
+    gap: var(--tk-spacing-lg);
+}
+
+.tk-stat-box {
+    text-align: center;
+}
+
+.tk-stat-box strong {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--tk-primary);
+    margin-bottom: var(--tk-spacing-xs);
+}
+
+.tk-stat-box span {
+    color: var(--tk-text-secondary);
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   Tabs
+   ============================================ */
+.tk-mobile-tab-select {
+    display: none;
+    width: 100%;
+    margin-bottom: var(--tk-spacing-lg);
+    padding: var(--tk-spacing-md);
+    background: var(--tk-bg-card);
+    border: 1px solid var(--tk-border);
+    border-radius: var(--tk-radius-md);
+    color: var(--tk-text-primary);
+    font-size: 1rem;
+}
+
+.tk-tabs {
+    display: flex;
+    gap: var(--tk-spacing-sm);
+    margin-bottom: var(--tk-spacing-xl);
+    overflow-x: auto;
+}
+
+.tk-tab-btn {
+    padding: var(--tk-spacing-md) var(--tk-spacing-lg);
+    background: var(--tk-bg-card);
+    border: 1px solid var(--tk-border);
+    border-radius: var(--tk-radius-md);
+    color: var(--tk-text-secondary);
+    cursor: pointer;
+    transition: var(--tk-transition);
+    white-space: nowrap;
+}
+
+.tk-tab-btn:hover {
+    background: var(--tk-bg-hover);
+    color: var(--tk-text-primary);
+}
+
+.tk-tab-btn.active {
+    background: var(--tk-primary);
+    color: white;
+    border-color: var(--tk-primary);
+}
+
+.tk-tab-content {
+    display: none;
+}
+
+.tk-tab-content.active {
+    display: block;
+}
+
+.tk-tab-header {
+    margin-bottom: var(--tk-spacing-xl);
+}
+
+.tk-tab-header h2 {
+    margin-bottom: var(--tk-spacing-xs);
+}
+
+.tk-tab-header p {
+    color: var(--tk-text-secondary);
+}
+
+/* ============================================
+   Filters
+   ============================================ */
+.tk-filters {
+    display: flex;
+    gap: var(--tk-spacing-md);
+    margin-bottom: var(--tk-spacing-lg);
+    flex-wrap: wrap;
+}
+
+.tk-filter-select {
+    flex: 1;
+    min-width: 200px;
+    padding: var(--tk-spacing-sm) var(--tk-spacing-md);
+    background: var(--tk-bg-card);
+    border: 1px solid var(--tk-border);
+    border-radius: var(--tk-radius-md);
+    color: var(--tk-text-primary);
+}
+
+/* ============================================
+   Proposals List
+   ============================================ */
+.tk-proposals-list,
+.tk-transactions-list {
+    display: grid;
+    gap: var(--tk-spacing-md);
+}
+
+.tk-proposal-card,
+.tk-transaction-card {
+    background: var(--tk-bg-card);
+    padding: var(--tk-spacing-lg);
+    border-radius: var(--tk-radius-lg);
+    border: 1px solid var(--tk-border);
+    transition: var(--tk-transition);
+}
+
+.tk-proposal-card:hover,
+.tk-transaction-card:hover {
+    box-shadow: var(--tk-shadow-md);
+    border-color: var(--tk-primary);
+}
+
+.tk-proposal-header,
+.tk-transaction-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--tk-spacing-md);
+}
+
+.tk-proposal-route {
+    display: flex;
+    align-items: center;
+    gap: var(--tk-spacing-sm);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.tk-status-badge {
+    padding: var(--tk-spacing-xs) var(--tk-spacing-sm);
+    border-radius: var(--tk-radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.tk-status-open {
+    background: rgba(76, 175, 80, 0.2);
+    color: var(--tk-success);
+}
+
+.tk-status-matched {
+    background: rgba(33, 150, 243, 0.2);
+    color: var(--tk-info);
+}
+
+.tk-status-completed {
+    background: rgba(76, 175, 80, 0.2);
+    color: var(--tk-success);
+}
+
+.tk-status-cancelled {
+    background: rgba(244, 67, 54, 0.2);
+    color: var(--tk-danger);
+}
+
+.tk-status-pending {
+    background: rgba(255, 152, 0, 0.2);
+    color: var(--tk-warning);
+}
+
+.tk-proposal-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--tk-spacing-md);
+    margin-bottom: var(--tk-spacing-md);
+}
+
+.tk-detail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tk-spacing-xs);
+}
+
+.tk-detail-label {
+    color: var(--tk-text-secondary);
+    font-size: 0.875rem;
+}
+
+.tk-detail-value {
+    font-weight: 600;
+    color: var(--tk-primary);
+}
+
+.tk-proposal-actions {
+    display: flex;
+    gap: var(--tk-spacing-sm);
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   Modal
+   ============================================ */
+.tk-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.tk-modal-content {
+    background: var(--tk-bg-card);
+    border-radius: var(--tk-radius-lg);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--tk-shadow-lg);
+}
+
+.tk-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--tk-spacing-lg);
+    border-bottom: 1px solid var(--tk-border);
+}
+
+.tk-modal-close {
+    background: none;
+    border: none;
+    color: var(--tk-text-secondary);
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.tk-modal-close:hover {
+    color: var(--tk-text-primary);
+}
+
+.tk-modal-body {
+    padding: var(--tk-spacing-lg);
+}
+
+/* ============================================
+   Messages
+   ============================================ */
+.tk-error-message,
+.tk-success-message {
+    padding: var(--tk-spacing-md);
+    border-radius: var(--tk-radius-md);
+    margin-top: var(--tk-spacing-md);
+}
+
+.tk-error-message {
+    background: rgba(244, 67, 54, 0.2);
+    color: var(--tk-danger);
+    border: 1px solid var(--tk-danger);
+}
+
+.tk-success-message {
+    background: rgba(76, 175, 80, 0.2);
+    color: var(--tk-success);
+    border: 1px solid var(--tk-success);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.tk-footer {
+    background: var(--tk-bg-card);
+    border-top: 1px solid var(--tk-border);
+    padding: var(--tk-spacing-xl) 0;
+    margin-top: auto;
+}
+
+.tk-footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--tk-spacing-xl);
+    margin-bottom: var(--tk-spacing-lg);
+}
+
+.tk-footer-section h3,
+.tk-footer-section h4 {
+    margin-bottom: var(--tk-spacing-sm);
+    color: var(--tk-primary);
+}
+
+.tk-footer-section p,
+.tk-footer-section ul {
+    color: var(--tk-text-secondary);
+    font-size: 0.875rem;
+}
+
+.tk-footer-section ul {
+    list-style: none;
+}
+
+.tk-footer-section ul li {
+    margin-bottom: var(--tk-spacing-xs);
+}
+
+.tk-footer-bottom {
+    text-align: center;
+    padding-top: var(--tk-spacing-lg);
+    border-top: 1px solid var(--tk-border);
+    color: var(--tk-text-secondary);
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.tk-mt-lg {
+    margin-top: var(--tk-spacing-lg);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+    .tk-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .tk-hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .tk-dashboard-header {
+        flex-direction: column;
+        gap: var(--tk-spacing-lg);
+    }
+
+    .tk-user-stats-summary {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .tk-tabs {
+        display: none;
+    }
+
+    .tk-mobile-tab-select {
+        display: block;
+    }
+
+    .tk-calculator-row {
+        grid-template-columns: 1fr;
+    }
+
+    .tk-filters {
+        flex-direction: column;
+    }
+
+    .tk-filter-select {
+        min-width: 100%;
+    }
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+.tk-loading {
+    text-align: center;
+    padding: var(--tk-spacing-xl);
+    color: var(--tk-text-secondary);
+}
+
+.tk-loading::after {
+    content: '...';
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
+/* ============================================
+   Empty State
+   ============================================ */
+.tk-empty-state {
+    text-align: center;
+    padding: var(--tk-spacing-xxl);
+    color: var(--tk-text-secondary);
+}
+
+.tk-empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: var(--tk-spacing-md);
+    opacity: 0.5;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Registro - TransKwanza</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header class="tk-header">
+        <div class="tk-container">
+            <nav class="tk-nav">
+                <div class="tk-logo">
+                    <h1>🌍 TransKwanza</h1>
+                </div>
+                <div class="tk-nav-links">
+                    <a href="index.html">Início</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="tk-auth-page">
+        <div class="tk-container">
+            <div class="tk-auth-container">
+                <div class="tk-auth-tabs">
+                    <button class="tk-auth-tab active" data-tab="login">Login</button>
+                    <button class="tk-auth-tab" data-tab="register">Criar Conta</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="login-form" class="tk-auth-form active">
+                    <h2>Entrar na sua conta</h2>
+                    <p class="tk-auth-subtitle">Entre para acessar seu dashboard</p>
+
+                    <form id="form-login">
+                        <div class="tk-form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" name="email" required>
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="login-password">Senha</label>
+                            <input type="password" id="login-password" name="password" required>
+                        </div>
+
+                        <div class="tk-form-actions">
+                            <button type="submit" class="tk-btn tk-btn-primary tk-btn-block">
+                                Entrar
+                            </button>
+                        </div>
+
+                        <div id="login-error" class="tk-error-message" style="display: none;"></div>
+                        <div id="login-success" class="tk-success-message" style="display: none;"></div>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div id="register-form" class="tk-auth-form">
+                    <h2>Criar nova conta</h2>
+                    <p class="tk-auth-subtitle">Registre-se gratuitamente para começar</p>
+
+                    <form id="form-register">
+                        <div class="tk-form-group">
+                            <label for="register-name">Nome Completo</label>
+                            <input type="text" id="register-name" name="full_name" required>
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" name="email" required>
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="register-password">Senha (mínimo 8 caracteres)</label>
+                            <input type="password" id="register-password" name="password" required minlength="8">
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="register-country">País</label>
+                            <select id="register-country" name="country_code" required>
+                                <option value="">Selecione seu país</option>
+                                <!-- Options will be loaded dynamically -->
+                            </select>
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="register-phone">Telefone (opcional)</label>
+                            <input type="tel" id="register-phone" name="phone">
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="register-document-type">Tipo de Documento (opcional)</label>
+                            <select id="register-document-type" name="document_type">
+                                <option value="">Selecione</option>
+                                <option value="cpf">CPF</option>
+                                <option value="passport">Passaporte</option>
+                                <option value="national_id">ID Nacional</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="register-document-number">Número do Documento (opcional)</label>
+                            <input type="text" id="register-document-number" name="document_number">
+                        </div>
+
+                        <div class="tk-form-actions">
+                            <button type="submit" class="tk-btn tk-btn-primary tk-btn-block">
+                                Criar Conta
+                            </button>
+                        </div>
+
+                        <div id="register-error" class="tk-error-message" style="display: none;"></div>
+                        <div id="register-success" class="tk-success-message" style="display: none;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="tk-footer">
+        <div class="tk-container">
+            <p>&copy; 2025 TransKwanza - Plataforma de Remessas P2P</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+</body>
+</html>

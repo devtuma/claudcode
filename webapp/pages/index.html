@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TransKwanza - Remessas Internacionais P2P</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header class="tk-header">
+        <div class="tk-container">
+            <nav class="tk-nav">
+                <div class="tk-logo">
+                    <h1>🌍 TransKwanza</h1>
+                </div>
+                <div class="tk-nav-links">
+                    <a href="#como-funciona">Como Funciona</a>
+                    <a href="#paises">Países</a>
+                    <a href="login.html" class="tk-btn tk-btn-primary tk-btn-sm">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="tk-hero">
+        <div class="tk-container">
+            <div class="tk-hero-content">
+                <h1>Plataforma de remessas cruzadas Segura</h1>
+                <p class="tk-hero-subtitle">
+                    Envie dinheiro internacionalmente de forma segura e econômica.<br>
+                    Conectamos pessoas que querem enviar valores em direções opostas.
+                </p>
+
+                <div class="tk-hero-features">
+                    <div class="tk-feature">
+                        <div class="tk-feature-icon">💰</div>
+                        <h3>Taxa de 3%</h3>
+                        <p>Transparente e competitiva</p>
+                    </div>
+
+                    <div class="tk-feature">
+                        <div class="tk-feature-icon">🌍</div>
+                        <h3>9 Países</h3>
+                        <p>Operação multinacional</p>
+                    </div>
+
+                    <div class="tk-feature">
+                        <div class="tk-feature-icon">⚡</div>
+                        <h3>Rápido e Seguro</h3>
+                        <p>Transações protegidas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="tk-section">
+        <div class="tk-container">
+            <div class="tk-calculator">
+                <h2>Calculadora de Câmbio</h2>
+                <p class="tk-calculator-subtitle">Veja quanto você vai receber</p>
+
+                <form id="calculator-form" class="tk-calculator-form">
+                    <div class="tk-calculator-row">
+                        <div class="tk-form-group">
+                            <label for="calc-from-currency">De</label>
+                            <select id="calc-from-currency" required>
+                                <option value="">Selecione a moeda</option>
+                                <!-- Options loaded dynamically -->
+                            </select>
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="calc-from-amount">Valor</label>
+                            <input type="number" id="calc-from-amount" step="0.01" min="0.01" placeholder="0.00" required>
+                        </div>
+                    </div>
+
+                    <div class="tk-calculator-arrow">→</div>
+
+                    <div class="tk-calculator-row">
+                        <div class="tk-form-group">
+                            <label for="calc-to-currency">Para</label>
+                            <select id="calc-to-currency" required>
+                                <option value="">Selecione a moeda</option>
+                                <!-- Options loaded dynamically -->
+                            </select>
+                        </div>
+
+                        <div class="tk-form-group">
+                            <label for="calc-to-amount">Você recebe</label>
+                            <input type="number" id="calc-to-amount" step="0.01" placeholder="0.00" readonly>
+                        </div>
+                    </div>
+
+                    <div class="tk-calculator-info" id="calculator-info" style="display: none;">
+                        <div class="tk-info-row">
+                            <span>Taxa de câmbio:</span>
+                            <strong id="calc-rate">-</strong>
+                        </div>
+                        <div class="tk-info-row">
+                            <span>Taxa da plataforma (3%):</span>
+                            <strong id="calc-fee">-</strong>
+                        </div>
+                    </div>
+
+                    <button type="button" class="tk-btn tk-btn-primary tk-btn-block" onclick="window.location.href='login.html'">
+                        Criar Proposta
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="tk-section tk-how-it-works" id="como-funciona">
+        <div class="tk-container">
+            <h2 class="tk-text-center">Como Funciona</h2>
+
+            <div class="tk-steps">
+                <div class="tk-step">
+                    <div class="tk-step-number">1</div>
+                    <h3>Calcule e Crie Proposta</h3>
+                    <p>Use nossa calculadora para ver quanto você vai enviar e receber. Crie sua proposta informando os dados.</p>
+                </div>
+
+                <div class="tk-step">
+                    <div class="tk-step-number">2</div>
+                    <h3>Sistema Encontra Parceria</h3>
+                    <p>Nosso algoritmo inteligente busca alguém querendo enviar na direção oposta (matching automático).</p>
+                </div>
+
+                <div class="tk-step">
+                    <div class="tk-step-number">3</div>
+                    <h3>Ambos Depositam Localmente</h3>
+                    <p>Você deposita na conta local da TransKwanza no seu país, e o parceiro faz o mesmo no país dele.</p>
+                </div>
+
+                <div class="tk-step">
+                    <div class="tk-step-number">4</div>
+                    <h3>Receba o Dinheiro</h3>
+                    <p>Após confirmação dos dois pagamentos, transferimos localmente para os destinatários.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Countries -->
+    <section class="tk-section tk-countries-preview" id="paises">
+        <div class="tk-container">
+            <h2 class="tk-text-center">Países Suportados</h2>
+            <div class="tk-countries-grid" id="countries-grid">
+                <!-- Countries loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="tk-section tk-cta">
+        <div class="tk-container">
+            <div class="tk-cta-content">
+                <h2>Pronto para Começar?</h2>
+                <p>Crie sua conta gratuitamente e comece a enviar dinheiro com segurança.</p>
+                <a href="login.html" class="tk-btn tk-btn-primary tk-btn-large">
+                    Criar Conta Grátis
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="tk-footer">
+        <div class="tk-container">
+            <div class="tk-footer-content">
+                <div class="tk-footer-section">
+                    <h3>TransKwanza</h3>
+                    <p>Remessas internacionais P2P seguras e econômicas</p>
+                </div>
+                <div class="tk-footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="#como-funciona">Como Funciona</a></li>
+                        <li><a href="#paises">Países</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+                <div class="tk-footer-section">
+                    <h4>Contato</h4>
+                    <p>Email: contato@transkwanza.com</p>
+                </div>
+            </div>
+            <div class="tk-footer-bottom">
+                <p>&copy; 2025 TransKwanza - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/home.js"></script>
+</body>
+</html>
